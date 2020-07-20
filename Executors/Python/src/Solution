@@ -1,0 +1,9 @@
+class Solution:
+
+    def proc(self):
+	    print("hello from method")
+
+
+if __name__ == '__main__':
+	print("hello")
+	Solution().proc()

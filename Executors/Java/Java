@@ -1,0 +1,19 @@
+FROM alpine:latest
+
+LABEL Author:Debasis Dwivedy \
+      Image_Version: alpine:latest \
+      Java_Version:OpenJDK 11
+
+RUN apk --update --no-cache add openjdk11
+
+# cannot run jar file downloaded from openJdk as alpine does not use glibc compiler
+#ADD openjdk-11+28_linux-x64_bin.tar.gz /usr/local/jdk/
+#RUN mv /usr/local/jdk/jdk-*/* /usr/local/jdk/ && rm -rf /usr/local/jdk/jdk-*
+
+ENV JAVA_HOME /usr/lib/jvm/java-11-openjdk
+ENV PATH $JAVA_HOME/bin:$PATH
+COPY src/ /usr/local/src/
+WORKDIR /usr/local/src/
+RUN javac Solution.java && java Solution > output.log 2>&1
+CMD ["/bin/sh", "-c", "tail -f /dev/null"]
+

@@ -1,0 +1,18 @@
+From centos:latest
+
+LABEL com.dwebstar.ansible.version=v0.1
+
+ENV REFRESHED_AT 2020-06-15
+
+RUN yum -y update
+RUN yum install -y epel-release
+RUN yum install -y ansible
+
+WORKDIR /etc/ansible
+
+# Copy all the contents from this folder to current working directory
+ONBUILD COPY . /etc/ansible/
+
+
+CMD ["/bin/bash"]
+

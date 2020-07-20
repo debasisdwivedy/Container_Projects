@@ -1,0 +1,12 @@
+FROM alpine:latest
+
+LABEL Author:Debasis Dwivedy \
+      Image_Version: alpine:latest \
+      Python_Version:Python 3
+
+RUN apk --update --no-cache add curl py-pip
+
+COPY src/ /usr/local/src/
+WORKDIR /usr/local/src/
+RUN python3 Solution > output.log 2>&1
+CMD ["/bin/sh", "-c", "tail -f /dev/null"]
